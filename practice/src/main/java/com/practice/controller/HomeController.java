@@ -9,4 +9,11 @@ public class HomeController {
     @GetMapping("/test")
     public String test() {
         return "test";
-    }}
+    }
+    
+    @GetMapping("/timer")
+    public String timer() {
+    	return "timer";
+    }
+    
+}
