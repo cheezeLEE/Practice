@@ -1,6 +1,6 @@
-package com.practice.service;
+package com.practice.common.service;
 
-import com.practice.dto.MailDto;
+import com.practice.common.model.MailDto;
 
 public interface MailService {
 	public void testMailSend(MailDto mailDto);

@@ -1,4 +1,4 @@
-package com.practice.service;
+package com.practice.common.service;
 
 import java.util.Random;
 
@@ -8,7 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.practice.dto.MailDto;
+import com.practice.common.model.MailDto;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -13,12 +13,11 @@ public class HomeController {
 	
     @GetMapping("/test")
     public String test() {
-        return "test";
+        return "test/test";
     }
     
     @GetMapping("/timer")
     public String timer() {
-    	return "timer";
+    	return "test/timer";
     }
-    
 }

@@ -1,4 +1,4 @@
-package com.practice.dto;
+package com.practice.common.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
