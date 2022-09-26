@@ -34,3 +34,5 @@ build/
 
 ### Project Setting ###
 src/main/resources/application.properties
+/mvnw
+/mvnw.cmd
