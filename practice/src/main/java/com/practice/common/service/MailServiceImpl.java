@@ -93,24 +93,36 @@ public class MailServiceImpl implements MailService{
         message.setText(validMessage + authKey);
         
         session.setAttribute(param.get("address").toString(), authKey);
-
+        // 인증번호 세션 시간 설정
+        session.setMaxInactiveInterval(300);
+        
         mailSender.send(message);    			
 	}
 
 	@Override
 	public boolean emailCertification(HttpSession session, String address, String inputCode) {
 		try {
-			String authKey = session.getAttribute(address).toString();
-			
-			log.info(":::::::::::::::::"+authKey);
-			log.info(":::::::::::::::::"+inputCode);
-			
-			if(authKey.equals(inputCode)) {
-				return true;
-			} else {
+
+			if(session.getAttribute(address) != null) {
+
+				String authKey = session.getAttribute(address).toString();
+				
+				log.info(":::::::::::::::::"+authKey);
+				log.info(":::::::::::::::::"+inputCode);
+				
+				if(authKey.equals(inputCode)) {
+					return true;
+				} else {
+					return false;
+				}				
+			}else {
+				log.info("세션이 만료되었습니다.");
 				return false;
 			}
+			
 		}catch(Exception e) {
+			log.info("실패...");
+			e.printStackTrace();
 			return false;			
 		}
 	}
