@@ -99,8 +99,12 @@ public class MailServiceImpl implements MailService{
         mailSender.send(message);    			
 	}
 
+	/*
+	 * 인증번호 체크 서비스로직
+	 * 인증완료 : 0 / 인증번호 오류 : 1 / 세션만료 : 2 / 기타에러 : 99
+	 */
 	@Override
-	public boolean emailCertification(HttpSession session, String address, String inputCode) {
+	public int emailCertification(HttpSession session, String address, String inputCode) {
 		try {
 
 			if(session.getAttribute(address) != null) {
@@ -111,19 +115,19 @@ public class MailServiceImpl implements MailService{
 				log.info(":::::::::::::::::"+inputCode);
 				
 				if(authKey.equals(inputCode)) {
-					return true;
+					return 0;
 				} else {
-					return false;
+					return 1;
 				}				
 			}else {
 				log.info("세션이 만료되었습니다.");
-				return false;
+				return 2;
 			}
 			
 		}catch(Exception e) {
 			log.info("실패...");
 			e.printStackTrace();
-			return false;			
+			return 99;			
 		}
 	}
 }

@@ -129,14 +129,19 @@
 					url: "/certification",
 					data:{"address": address, "inputCode":inputCode},
 					success: function(result){
-						console.log("result ::::::" + result);
-						if(result == true){
-							alert("인증완료");
+						alert(result);
 						    clearInterval(timer);
 							certificationYN = "Y";
-						}else{
-							alert("실패");
-						}
+					},
+				    error : function(request,status){
+				    	certificationYN = "N";
+				    	if(request.status === 400){
+				    		alert("인증번호를 확인해주세요.");
+				    	}else if(request.status === 401){
+				    		alert("세션이 만료되었습니다. 재전송 후 다시 입력해주세요.");
+				    	}else{
+				    		alert("서버오류입니다.");
+				    	}
 					}
 				});
 			}else{

@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,11 +62,21 @@ public class MailController {
 	
 	@RequestMapping(value="/certification", method = RequestMethod.POST)
 	@ResponseBody
-	private boolean emailCertification(HttpServletRequest request, String address, String inputCode) {
+	private ResponseEntity<String> emailCertification(HttpServletRequest request, String address, String inputCode) {
 		HttpSession session = request.getSession();
-		boolean result = mailService.emailCertification(session, address, inputCode);
+		int result = mailService.emailCertification(session, address, inputCode);
 		
-		return result;
+		if(result == 0) {
+			return new ResponseEntity<>("인증완료", HttpStatus.OK); // 200
+		}else if(result == 1) {
+			return new ResponseEntity<>("인증번호 오류", HttpStatus.BAD_REQUEST); // 400
+		}else if(result == 2) {
+			return new ResponseEntity<>("세션 만료", HttpStatus.UNAUTHORIZED);	 // 401
+		}else if(result == 99) {
+			return new ResponseEntity<>("문법 오류", HttpStatus.INTERNAL_SERVER_ERROR); // 500
+		}else {
+			return new ResponseEntity<>("정체불명의 오류", HttpStatus.INTERNAL_SERVER_ERROR); //500
+		}
 	}
 
 }
