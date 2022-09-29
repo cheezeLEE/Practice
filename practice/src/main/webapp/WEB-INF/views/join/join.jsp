@@ -41,7 +41,8 @@
 		</form>
 	</div>
 	<script src="static/js/jquery3.6.1.js"></script>
-	<script>
+    <script src="static/js/Crypto.js"></script>
+    <script>
 	    let timer, address;
 	    let certificationYN = "N";
 	
@@ -79,6 +80,64 @@
 	        }
 	      });
 	    }
+	     
+	     
+	     /* [aes 256 인코딩, 디코딩에 필요한 전역 변수 선언] */
+	    	var aes256SecretKey = "0123456789abcdef0123456789abcdef"; // key 값 32 바이트
+	    	var aes256Iv = "0123456789abcdef"; //iv 16 바이트
+	    	var aes256EncodeData = "";
+	    	var aes256DecodeData = "";
+
+
+	    	/* [aes128Encode 이벤트 함수 정의] */
+	    	function aes256Encode(secretKey, Iv, data){
+	    		console.log("");
+	    		console.log("[aes256Encode] : [start]");
+	    		console.log("[secretKey] : " + secretKey); 
+	    		console.log("[Iv] : " + Iv); 
+	    		console.log("[data] : " + data);  		
+	    		console.log("");
+
+	    		// [aes 인코딩 수행 실시 : cbc 모드]
+	    		const cipher = CryptoJS.AES.encrypt(data, CryptoJS.enc.Utf8.parse(secretKey), {
+	    			iv: CryptoJS.enc.Utf8.parse(Iv), // [Enter IV (Optional) 지정 방식]
+	    			padding: CryptoJS.pad.Pkcs7,
+	    			mode: CryptoJS.mode.CBC // [cbc 모드 선택]
+	    		});
+
+	    		// [인코딩 된 데이터 확인 실시]
+	    		aes256EncodeData = cipher.toString();
+	    		console.log("");
+	    		console.log("[aes256Encode] : [encode]");
+	    		console.log("[data] : " + aes256EncodeData);  		
+	    		console.log("");
+	    	};
+
+
+	    	/* [aes256Decode 이벤트 함수 정의] */
+	    	function aes256Decode(secretKey, Iv, data){
+	    		console.log("");
+	    		console.log("[aes256Decode] : [start]");
+	    		console.log("[secretKey] : " + secretKey); 
+	    		console.log("[Iv] : " + Iv); 
+	    		console.log("[data] : " + data);  		
+	    		console.log("");
+
+	    		// [aes 디코딩 수행 실시 : cbc 모드]
+	    		const cipher = CryptoJS.AES.decrypt(data, CryptoJS.enc.Utf8.parse(secretKey), {
+	    			iv: CryptoJS.enc.Utf8.parse(Iv), // [Enter IV (Optional) 지정 방식]
+	    			padding: CryptoJS.pad.Pkcs7,
+	    			mode: CryptoJS.mode.CBC // [cbc 모드 선택]
+	    		});
+
+	    		// [인코딩 된 데이터 확인 실시]
+	    		aes256DecodeData = cipher.toString(CryptoJS.enc.Utf8);    		
+	    		console.log("");
+	    		console.log("[aes256Decode] : [decode]");
+	    		console.log("[data] : " + aes256DecodeData);  		
+	    		console.log("");
+	    	};
+
 	
 	    $("#resetBtn").on("click", function(){
 	      clearInterval(timer);
@@ -100,12 +159,12 @@
 				 type: "post",
 				 data: {"address": address},
 				 success: function(data){
+				     Timer(300);
+					 $("#validBtn").css("display", "none");
+					 $("#validDiv").css("display", "block");
 					 alert("인증번호를 전송했습니다.");
 					 console.log("data : " + data);
 					  // 이메일 전송 성공 시 타이머 동작
-				      Timer(300);
-					  $("#validBtn").css("display", "none");
-					  $("#validDiv").css("display", "block");
 				 }
 			  });
 			} else{
@@ -151,9 +210,17 @@
 		
 		$("#submitBtn").on("click", function(e){
 			e.preventDefault();
-			
+						
 			if(certificationYN == 'Y'){
-				alert("회원가입완료!!")
+				
+				// [aes256 인코딩 함수 호출 실시]
+	    		aes256Encode(aes256SecretKey, "", "$('#userPw').val()");
+				console.log(aes256EncodeData);
+				$("#userPw").val(aes256EncodeData);
+				
+	    		// [aes256 디코딩 함수 호출 실시]
+//	    		aes256Decode(aes256SecretKey, "", aes256EncodeData);
+				
 				$("#joinF").submit();				
 			}else{
 				alert("인증을 진행해주세요")
