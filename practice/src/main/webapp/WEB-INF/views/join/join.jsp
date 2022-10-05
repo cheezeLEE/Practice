@@ -67,7 +67,10 @@
 		});
 				
 		$("#resendBtn").on("click", function(e){
-		    clearInterval(timer);
+			address = $("#userEmail").val();
+			//타이머 초기화
+			clearInterval(timer);
+		    emailSend(address);
 			alert("인증번호 재발송");
 			Timer(300);
 		});
