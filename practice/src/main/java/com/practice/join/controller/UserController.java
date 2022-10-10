@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.practice.join.model.UserModel;
-import com.practice.join.service.JoinService;
+import com.practice.join.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-public class JoinController {
+public class UserController {
 	
 	@Autowired
-	private JoinService service;
+	private UserService service;
 	
     
     @GetMapping("/join")
@@ -25,8 +25,14 @@ public class JoinController {
     }
     
     @PostMapping("/join")
-    public String joinPost(Model model, UserModel user) {
-    	model.addAttribute("user", user);
+    public String joinPost(Model model, UserModel userModel) {
+    	log.info("join controller");
+    	
+    	int join = service.join(userModel);
+    	
+    	log.info("Join Count : "+join);
+    	
+    	model.addAttribute("user", userModel);
     	return "join/joinResult";
     }
 }
