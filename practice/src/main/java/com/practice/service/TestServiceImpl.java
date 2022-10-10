@@ -16,4 +16,7 @@ public class TestServiceImpl implements TestService {
 	public List<Map<String,Object>> getUserInfo(int userSeq) {
 		return testDAO.getUserInfo(userSeq);
 	}
+	public List<Map<String,Object>> getUserInfo2(int userSeq) {
+		return testDAO.getUserInfo2(userSeq);
+	}
 }

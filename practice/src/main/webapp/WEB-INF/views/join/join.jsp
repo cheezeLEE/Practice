@@ -19,8 +19,8 @@
 				<input type="password" name="userPw" id="userPw" value="" required/>
 			</div>
 			<div>
-				<label for="userNm">이름</label>
-				<input type="text" name="userNm" id="userNm" value="" oninput="this.value = this.value.replace(/[^ㄱ-ㅎ|가-힣]/g, '').replace(/(\..*)\./g, '$1');" required/>
+				<label for="userName">이름</label>
+				<input type="text" name="userName" id="userName" value="" oninput="this.value = this.value.replace(/[^ㄱ-ㅎ|가-힣]/g, '').replace(/(\..*)\./g, '$1');" required/>
 			</div>
 			<div>
 				<label for="userEmail">이메일</label>

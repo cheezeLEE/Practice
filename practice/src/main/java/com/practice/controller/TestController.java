@@ -15,9 +15,13 @@ public class TestController {
 	@GetMapping("/testOracle")
 	public String mypage() {
 
-		System.out.println(service.getUserInfo(1));
-
-
+		System.out.println("1:::::::::::"+service.getUserInfo(1));
+		return "test/test";
+	}
+	
+	@GetMapping("/testMysql")
+	public String mypage2() {
+		System.out.println("2:::::::::::"+service.getUserInfo2(1));
 		return "test/test";
 	}
 }

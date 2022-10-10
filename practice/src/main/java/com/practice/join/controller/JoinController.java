@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.practice.join.model.User;
+import com.practice.join.model.UserModel;
 import com.practice.join.service.JoinService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class JoinController {
     }
     
     @PostMapping("/join")
-    public String joinPost(Model model, User user) {
+    public String joinPost(Model model, UserModel user) {
     	model.addAttribute("user", user);
     	return "join/joinResult";
     }
