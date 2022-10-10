@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -18,15 +19,15 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 public class OracleDatabaseConfig {
  
     @Primary
-    @Bean(name = "datasource")
+    @Bean(name = "oracleDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.oracle")
-    public DataSource dataSource() {
+    public DataSource oracleDataSource() {
         return DataSourceBuilder.create().build();
     }
     
     @Primary
-    @Bean(name = "factory")
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+    @Bean
+    public SqlSessionFactory oracleSqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
         sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:static/mappers/oracle/*.xml"));
@@ -34,8 +35,9 @@ public class OracleDatabaseConfig {
     }
     
     @Primary
-    @Bean(name = "sqlSession")
-    public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
+    @Bean(name = "oracleSqlSession")
+    public SqlSessionTemplate oracleSqlSession(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
+    
 }

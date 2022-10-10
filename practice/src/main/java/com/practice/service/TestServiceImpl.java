@@ -6,17 +6,22 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.practice.dao.TestDAO;
+import com.practice.dao.mysql.MysqlDAO;
+import com.practice.dao.oracle.OracleDAO;
 
 @Service
 public class TestServiceImpl implements TestService {
+	
 	@Autowired
-	private TestDAO testDAO;
+	private OracleDAO oracleDAO;
+	
+	@Autowired
+	private MysqlDAO mysqlDAO;
 
 	public List<Map<String,Object>> getUserInfo(int userSeq) {
-		return testDAO.getUserInfo(userSeq);
+		return oracleDAO.getUserInfo(userSeq);
 	}
 	public List<Map<String,Object>> getUserInfo2(int userSeq) {
-		return testDAO.getUserInfo2(userSeq);
+		return mysqlDAO.getUserInfo2(userSeq);
 	}
 }

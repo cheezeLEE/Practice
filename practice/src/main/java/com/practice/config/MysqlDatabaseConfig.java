@@ -17,22 +17,22 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 @MapperScan(value = "com.practice.dao.mysql", sqlSessionFactoryRef = "factory2")
 public class MysqlDatabaseConfig {
  
-    @Bean(name = "datasource2")
+    @Bean(name = "mysqlDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.mysql")
-    public DataSource dataSource() {
+    public DataSource mysqlDataSource() {
         return DataSourceBuilder.create().build();
     }
     
-    @Bean(name = "factory2")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("datasource2") DataSource dataSource) throws Exception {
+    @Bean(name = "mysqlSqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("mysqlDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
         sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:static/mappers/mysql/*.xml"));
         return sqlSessionFactory.getObject();
     }
     
-    @Bean(name = "sqlSession2")
-    public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
+    @Bean(name = "mysqlSqlSession")
+    public SqlSessionTemplate mysqlSqlSession(@Qualifier("mysqlSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }
