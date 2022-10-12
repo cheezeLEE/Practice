@@ -16,7 +16,8 @@
 			</div>
 			<div>
 				<label for="userPw">비밀번호</label>
-				<input type="password" name="userPw" id="userPw" value="" required/>
+				<input type="password" id="password" value="" required/>
+				<input type="hidden" name="userPw" id="userPw" value="" required/>
 			</div>
 			<div>
 				<label for="userName">이름</label>
@@ -111,13 +112,13 @@
 			if(certificationYN == 'Y'){
 				
 				// [aes256 인코딩 함수 호출 실시]
-	    		aes256Encode(aes256SecretKey, "", "$('#userPw').val()");
+	    		aes256Encode(aes256SecretKey, "", $('#password').val());
 	    		console.log("인코딩 : " + aes256EncodeData);
 				$("#userPw").val(aes256EncodeData);
 				
 	    		// [aes256 디코딩 함수 호출 실시]
-	    		aes256Decode(aes256SecretKey, "", aes256EncodeData);
-	    		console.log("디코딩 : " + aes256DecodeData);
+//	    		aes256Decode(aes256SecretKey, "", aes256EncodeData);
+//	    		console.log("디코딩 : " + aes256DecodeData);
 				
 				$("#joinF").submit();				
 			}else{
