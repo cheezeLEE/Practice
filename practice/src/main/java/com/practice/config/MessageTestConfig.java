@@ -14,8 +14,8 @@ import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Configuration // 설정파일을 의미하는 어노테이션
-public class WebConfig {
+//@Configuration // 설정파일을 의미하는 어노테이션 -> Spring Message 태그 사용을 위해 주석처리
+public class MessageTestConfig {
 
     @Bean // LocaleResolver Bean 생성 : 다국어처리 방법 선택
     public LocaleResolver defaultLocaleResolver() {
