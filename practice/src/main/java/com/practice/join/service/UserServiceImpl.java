@@ -21,4 +21,10 @@ public class UserServiceImpl implements UserService {
 		return dao.join(userModel);
 	}
 
+	@Override
+	public int login(UserModel userModel) {
+		log.info("login service");
+		return dao.login(userModel);
+	}
+
 }

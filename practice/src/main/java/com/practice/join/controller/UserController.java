@@ -18,6 +18,27 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
+	
+	@PostMapping("/login")
+	public String loginPost(Model model, UserModel userModel) {
+		log.info("login controller");
+		
+		int login = service.login(userModel);
+				
+		if(login == 1) {
+			log.info("login success");
+			model.addAttribute("user", userModel);			
+			return "main/main";
+		}else {
+			log.info("login fail");
+			log.info("input password : " + userModel.getUserPw());			
+			return "login";
+		}		
+	}
     
     @GetMapping("/join")
     public String join() {
@@ -33,6 +54,6 @@ public class UserController {
     	log.info("Join Count : "+join);
     	
     	model.addAttribute("user", userModel);
-    	return "join/joinResult";
-    }
+    	return "login";
+    }    
 }

@@ -21,4 +21,9 @@ public class UserDAO {
 		log.info("join DAO");
 		return sqlSessionTemplate.insert("userMapper.join",userModel);
 	}
+	
+	public int login(UserModel userModel) {
+		log.info("login DAO");
+		return sqlSessionTemplate.selectOne("userMapper.login", userModel);
+	}
 }
