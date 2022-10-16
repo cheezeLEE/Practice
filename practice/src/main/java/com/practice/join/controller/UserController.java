@@ -1,10 +1,16 @@
 package com.practice.join.controller;
 
+import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.practice.join.model.UserModel;
 import com.practice.join.service.UserService;
@@ -41,7 +47,8 @@ public class UserController {
 	}
     
     @GetMapping("/join")
-    public String join() {
+    public String join(@RequestParam("lang") String lang, HttpSession session) {
+    	session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, new Locale(lang));
     	return "join/join";
     }
     
