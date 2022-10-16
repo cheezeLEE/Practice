@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,9 @@
 </head>
 <body>
 	<div>
-		<select name="lang">
-			<option value="ko" selected>한국어</option>
-			<option value="en">영어</option>
+		<select name="lang" id="langSel">
+			<option value="ko" <c:if test="${language eq 'ko'}">selected</c:if>>한국어</option>
+			<option value="en" <c:if test="${language eq 'en'}">selected</c:if>>영어</option>
 		</select>
 		<h1><spring:message code="join" /></h1>
 		<form action="/join" id="joinF" method="post">
@@ -129,6 +130,10 @@
 			}else{
 				alert("인증을 진행해주세요")
 			}			
+		});
+		
+		$("#langSel").on("change", function(){
+			location.href="/join?language="+$("#langSel option:selected").val();
 		});
 	</script>
 </body>

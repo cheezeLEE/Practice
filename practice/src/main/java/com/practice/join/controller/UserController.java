@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,8 +48,15 @@ public class UserController {
 	}
     
     @GetMapping("/join")
-    public String join(@RequestParam("lang") String lang, HttpSession session) {
-    	session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, new Locale(lang));
+    public String join(@Nullable@RequestParam("language") String language, HttpSession session, Model model) {
+    	
+    	if(language == null) {
+    		language = "ko";
+    	}    		
+
+    	session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, new Locale(language));
+    	model.addAttribute("language", language);
+    	
     	return "join/join";
     }
     
@@ -62,5 +70,5 @@ public class UserController {
     	
     	model.addAttribute("user", userModel);
     	return "login";
-    }    
+    }        
 }
