@@ -1,43 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title><spring:message code="join" /></title>
 </head>
 <body>
 	<div>
-		<h1>회원가입</h1>
+		<select name="lang">
+			<option value="ko" selected>한국어</option>
+			<option value="en">영어</option>
+		</select>
+		<h1><spring:message code="join" /></h1>
 		<form action="/join" id="joinF" method="post">
 			<div>
-				<label for="userId">아이디</label>
+				<label for="userId"><spring:message code="join.id" /></label>
 				<input type="text" name="userId" id="userId" value="" required/>
 			</div>
 			<div>
-				<label for="userPw">비밀번호</label>
+				<label for="userPw"><spring:message code="join.password" /></label>
 				<input type="password" id="password" value="" required/>
 				<input type="hidden" name="userPw" id="userPw" value="" required/>
 			</div>
 			<div>
-				<label for="userName">이름</label>
+				<label for="userName"><spring:message code="join.name" /></label>
 				<input type="text" name="userName" id="userName" value="" oninput="this.value = this.value.replace(/[^ㄱ-ㅎ|가-힣]/g, '').replace(/(\..*)\./g, '$1');" required/>
 			</div>
 			<div>
-				<label for="userEmail">이메일</label>
+				<label for="userEmail"><spring:message code="join.email" /></label>
 				<input type="email" name="userEmail" id="userEmail" value="" required/>			
-				<button type="button" id="validBtn">인증</button>
+				<button type="button" id="validBtn"><spring:message code="join.certification" /></button>
 			</div>
 			<div id="validDiv" style="display:none;">
-				<label for="validCode">인증번호</label>
+				<label for="validCode"><spring:message code="join.certificationNumber" /></label>
 				<input type="text" name="validCode" id="validCode" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="6" required/>
 				<span class="set-time">5:00</span>
-				<button type="button" id="resendBtn">재전송</button>
+				<button type="button" id="resendBtn"><spring:message code="join.resend" /></button>
 			</div>
 			<div>
-				<button type="submit" id="submitBtn">가입</button>
-				<button type="reset" id="resetBtn">초기화</button>
-				<button type="button" id="cancelBtn">취소</button>
+				<button type="submit" id="submitBtn"><spring:message code="join.join" /></button>
+				<button type="reset" id="resetBtn"><spring:message code="join.reset" /></button>
+				<button type="button" id="cancelBtn"><spring:message code="join.cancel" /></button>
 			</div>
 		</form>
 	</div>
