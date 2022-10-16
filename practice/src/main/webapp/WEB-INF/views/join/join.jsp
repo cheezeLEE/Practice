@@ -11,8 +11,8 @@
 <body>
 	<div>
 		<select name="lang" id="langSel">
-			<option value="ko" <c:if test="${language eq 'ko'}">selected</c:if>>한국어</option>
-			<option value="en" <c:if test="${language eq 'en'}">selected</c:if>>영어</option>
+			<option value="ko" <c:if test="${language eq 'ko'}">selected</c:if>><spring:message code="join.ko" /></option>
+			<option value="en" <c:if test="${language eq 'en'}">selected</c:if>><spring:message code="join.en" /></option>
 		</select>
 		<h1><spring:message code="join" /></h1>
 		<form action="/join" id="joinF" method="post">
