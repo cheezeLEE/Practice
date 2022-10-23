@@ -1,25 +1,24 @@
 package com.practice.controller;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.practice.service.TestService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Slf4j
 @RequiredArgsConstructor
 @Controller
 public class TestController {
 
-    private final MessageSourceAccessor messageSource;
+//    private final MessageSourceAccessor messageSource;
 
 	@Autowired
 	private TestService service;
@@ -87,6 +86,19 @@ public class TestController {
 	@GetMapping("/messageTest")
 	public String messageTest() {
 		return "test/messageTest";
+	}
+	
+	
+	@GetMapping("/smsTest")
+	public String mySms() {
+		return "test/smsTest";
+	}
+	    
+	// coolSMS 구현 로직 연결  
+	@PostMapping("/check/sendSMS")
+	@ResponseBody
+	public String sendSMS(@RequestParam(value="to") String to) throws CoolsmsException {  	
+		return service.PhoneNumberCheck(to);
 	}
 
 }
