@@ -117,15 +117,15 @@
 			e.preventDefault();
 						
 			if(certificationYN == 'Y'){
-				
-				// [aes256 인코딩 함수 호출 실시]
+/* 	Spring Security에서 BCryptPasswordEncoder를 사용하기 때문에 인코딩을 Java 단에서 수행함			
+ 				// [aes256 인코딩 함수 호출 실시]
 	    		aes256Encode(aes256SecretKey, "", $('#password').val());
 	    		console.log("인코딩 : " + aes256EncodeData);
 				$("#userPw").val(aes256EncodeData);
 				
 	    		// [aes256 디코딩 함수 호출 실시]
 //	    		aes256Decode(aes256SecretKey, "", aes256EncodeData);
-//	    		console.log("디코딩 : " + aes256DecodeData);
+//	    		console.log("디코딩 : " + aes256DecodeData); */
 				
 				$("#joinF").submit();				
 			}else{

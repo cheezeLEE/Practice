@@ -42,7 +42,7 @@
     <script src="static/js/Crypto.js"></script>
     <script src="static/js/join.js"></script>
     <script>
-    	$("#loginBtn").on("click", function(e){
+/*     	$("#loginBtn").on("click", function(e){
     		e.preventDefault();
 
     		// [aes256 인코딩 함수 호출 실시]
@@ -55,7 +55,7 @@
     		console.log("디코딩 : " + aes256DecodeData);
 
 			$("#loginForm").submit();
-    	});
+    	}); */
     </script>
 </body>
 </html>

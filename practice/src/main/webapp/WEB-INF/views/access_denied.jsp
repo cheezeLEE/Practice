@@ -4,12 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인페이지</title>
+<title>Insert title here</title>
 </head>
 <body>
-	${info}
-	<form action="logout" method="post">
-		<button>로그아웃</button>
-	</form>
+	아이디 또는 비밀번호가 일치하지 않습니다.
 </body>
 </html>

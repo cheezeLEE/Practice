@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userMapper">
+	<!-- 회원가입 -->
 	<insert id="join" parameterType="com.practice.join.dao.UserDAO">
-		INSERT INTO tbl_user(userId, userPw, userName, userEmail, auth)
-		VALUES(#{userId}, #{userPw}, #{userName}, #{userEmail}, #{auth})
+		INSERT INTO 
+			tbl_user(userId, userPw, userName, userEmail, auth)
+		VALUES
+			(#{userId}, #{userPw}, #{userName}, #{userEmail}, #{auth})
 	</insert>
 	
-	<select id="login" parameterType="com.practice.join.dao.UserDAO" resultType="int">
-		SELECT COUNT(1)
-		FROM tbl_user
-		WHERE userId = #{userId}
+<!-- 	<select id="login" parameterType="com.practice.join.dao.UserDAO" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM 
+			tbl_user
+		WHERE 
+			userId = #{userId}
 			AND userPw = #{userPw}
+	</select> -->
+	
+	<!-- 로그인을 시도한 아이디에 해당하는 계정정보 조회 -->
+	<select id="getAccount" parameterType="string" resultType="com.practice.join.model.UserModel">
+		SELECT 
+			userId, userPw, userName, userEmail, auth
+		FROM 
+			tbl_user
+		WHERE 
+			userId = #{userId}
 	</select>
 </mapper>
