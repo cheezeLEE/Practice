@@ -4,5 +4,10 @@ import lombok.Data;
 
 @Data
 public class UserModel {
-	private String userId, userPw, userName, userEmail, validCode;
+	private String userId;
+	private String userPw;
+	private String userName;
+	private String userEmail;
+	private String validCode;
+	private String auth;
 }

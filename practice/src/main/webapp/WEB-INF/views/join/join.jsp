@@ -40,6 +40,7 @@
 				<span class="set-time">5:00</span>
 				<button type="button" id="resendBtn"><spring:message code="join.resend" /></button>
 			</div>
+			<input type="hidden" name="auth" id="auth" value="USER"/>
 			<div>
 				<button type="submit" id="submitBtn"><spring:message code="join.join" /></button>
 				<button type="reset" id="resetBtn"><spring:message code="join.reset" /></button>

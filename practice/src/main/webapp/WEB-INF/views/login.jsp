@@ -31,6 +31,11 @@
         </div>
         <a href="#">아이디/</a><a href="#">비밀번호 찾기</a>
         <a href="/join">회원가입</a>
+        <br/>
+        <button>구글</button>
+        <button>카카오</button>
+        <button>네이버</button>
+        <button>페이스북</button>
     </form>
     
 	<script src="static/js/jquery3.6.1.js"></script>
